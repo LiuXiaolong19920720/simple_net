@@ -72,7 +72,7 @@ namespace liu
 	}
 
 	//Objective function
-	void calcLoss(cv::Mat &output, cv::Mat &target, cv::Mat &output_error, double &loss)
+	void calcLoss(cv::Mat &output, cv::Mat &target, cv::Mat &output_error, float &loss)
 	{
 		if (target.empty())
 		{
@@ -83,7 +83,7 @@ namespace liu
 		cv::Mat err_sqrare;
 		pow(output_error, 2., err_sqrare);
 		cv::Scalar err_sqr_sum = sum(err_sqrare);
-		loss = err_sqr_sum[0] / 2.;
+		loss = err_sqr_sum[0] / (float)(output.rows);
 	}
 
 

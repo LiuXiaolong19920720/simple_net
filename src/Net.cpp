@@ -44,7 +44,7 @@ namespace liu
 			//bias[i].create(layer[i + 1].rows, 1, CV_32FC1);
 			bias[i] = cv::Mat::zeros(layer[i + 1].rows, 1, CV_32FC1);
 		}
-		std::cout << "Generate weights cv::Matrices and bias, successfully!" << std::endl;
+		std::cout << "Generate weights matrices and bias, successfully!" << std::endl;
 		std::cout << "Initialise Net, done!" << std::endl;
 	}
 
@@ -64,7 +64,7 @@ namespace liu
 	//initialise the weights matrix.
 	void Net::initWeights(int type, double a, double b)
 	{
-		//Initialise weights cv::Matrices and bias
+		//Initialise weights matrices and bias
 		for (int i = 0; i < weights.size(); ++i)
 		{
 			initWeight(weights[i], 0, 0., 0.1);
@@ -88,14 +88,13 @@ namespace liu
 			cv::Mat product = weights[i] * layer[i] + bias[i];
 			layer[i + 1] = activationFunction(product, activation_function);
 		}
-		calcLoss(layer[layer.size() - 1], target, output_error, loss);
+		//calcLoss(layer[layer.size() - 1], target, output_error, loss);
 	}
 
 	//Compute delta error
 	void Net::deltaError()
 	{
 		delta_err.resize(layer.size() - 1);
-
 		for (int i = delta_err.size() - 1; i >= 0; i--)
 		{
 			delta_err[i].create(layer[i + 1].size(), layer[i + 1].type());
@@ -121,12 +120,7 @@ namespace liu
 	{
 		for (int i = 0; i < weights.size(); ++i)
 		{
-			cv::Mat weight = weights[i];
-			cv::Mat delta_err_1 = delta_err[i];
-			cv::Mat layer_1 = layer[i];
-
 			cv::Mat delta_weights = learning_rate * (delta_err[i] * layer[i].t());
-
 			weights[i] = weights[i] + delta_weights;
 		}
 	}
@@ -134,7 +128,7 @@ namespace liu
 	//Forward
 	void Net::backward()
 	{
-		//cv::Mat temp1 = output_error;
+		calcLoss(layer[layer.size() - 1], target, output_error, loss);
 		deltaError();
 		updateWeights();
 	}

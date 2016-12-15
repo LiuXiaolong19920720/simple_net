@@ -17,7 +17,7 @@ namespace liu
 	cv::Mat derivativeFunction(cv::Mat& fx, std::string func_type);
 
 	//Objective function
-	void calcLoss(cv::Mat &output, cv::Mat &target, cv::Mat &output_error, double &loss);
+	void calcLoss(cv::Mat &output, cv::Mat &target, cv::Mat &output_error, float &loss);
 
 
 }

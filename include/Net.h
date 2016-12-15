@@ -34,9 +34,8 @@ namespace liu
 
 		cv::Mat output_error;
 		cv::Mat target;
-		double loss;
 		cv::Mat board;
-
+		float loss;
 
 	public:
 		Net() {};
@@ -98,5 +97,4 @@ namespace liu
 
 	// Draw loss curve
 	void draw_curve(cv::Mat& board, std::vector<double> points);
-
 }
