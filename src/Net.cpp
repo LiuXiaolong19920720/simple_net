@@ -88,7 +88,7 @@ namespace liu
 			cv::Mat product = weights[i] * layer[i] + bias[i];
 			layer[i + 1] = activationFunction(product, activation_function);
 		}
-		//calcLoss(layer[layer.size() - 1], target, output_error, loss);
+		calcLoss(layer[layer.size() - 1], target, output_error, loss);
 	}
 
 	//Compute delta error
@@ -128,13 +128,14 @@ namespace liu
 	//Forward
 	void Net::backward()
 	{
-		calcLoss(layer[layer.size() - 1], target, output_error, loss);
+		//move this function to the end of the forward().
+		//calcLoss(layer[layer.size() - 1], target, output_error, loss);
 		deltaError();
 		updateWeights();
 	}
 
 	//Train,use accuracy_threshold
-	void Net::train(cv::Mat input, cv::Mat target_, double accuracy_threshold)
+	void Net::train(cv::Mat input, cv::Mat target_, float accuracy_threshold)
 	{
 		if (input.empty())
 		{
@@ -275,7 +276,7 @@ namespace liu
 				}
 				if (epoch % 100 == 0)
 				{
-					learning_rate *= 1.01;
+					learning_rate *= fine_tune_factor;
 				}
 			}
 			std::cout << std::endl << "Number of epoch: " << epoch << std::endl;
