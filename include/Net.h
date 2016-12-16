@@ -19,12 +19,14 @@ namespace liu
 	class Net
 	{
 	public:
+        //Integer vector specifying the number of neurons in each layer including the input and output layers.
 		std::vector<int> layer_neuron_num;
 		std::string activation_function = "sigmoid";
 		int output_interval = 10;
-		double learning_rate; //learning rate
-		double accuracy = 0.;
+		float learning_rate; 
+		float accuracy = 0.;
 		std::vector<double> loss_vec;
+		float fine_tune_factor = 1.01;
 
 	protected:
 		std::vector<cv::Mat> layer;
@@ -58,7 +60,7 @@ namespace liu
 		void backward();
 
 		//Train,use accuracy_threshold
-		void train(cv::Mat input, cv::Mat target, double accuracy_threshold);
+		void train(cv::Mat input, cv::Mat target, float accuracy_threshold);
 
 		//Train,use loss_threshold
 		void Net::train(cv::Mat input, cv::Mat target_, float loss_threshold, bool draw_loss_curve = false);
