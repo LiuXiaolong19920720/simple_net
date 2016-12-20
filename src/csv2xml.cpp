@@ -18,17 +18,17 @@ int csv2xml()
 	Mat label_ = data(Rect(0, 1, 1, data.rows - 1));
 	Mat target_(10, input_.cols, CV_32F, Scalar::all(0.));
 
-	//Mat digit(28, 28, CV_32FC1);
-	//Mat col_0 = input_.col(3);
-	//float label0 = label_.at<float>(3, 0);
-	//cout << label0;
-	//for (int i = 0; i < 28; i++)
-	//{
-	//	for (int j = 0; j < 28; j++)
-	//	{
-	//		digit.at<float>(i, j) = col_0.at<float>(i * 28 + j);
-	//	}
-	//}
+	Mat digit(28, 28, CV_32FC1);
+	Mat col_0 = input_.col(3);
+	float label0 = label_.at<float>(3, 0);
+	cout << label0;
+	for (int i = 0; i < 28; i++)
+	{
+		for (int j = 0; j < 28; j++)
+		{
+			digit.at<float>(i, j) = col_0.at<float>(i * 28 + j);
+		}
+	}
 
 	for (int i = 0; i < label_.rows; ++i)
 	{
@@ -49,7 +49,7 @@ int csv2xml()
 		}
 	}
 
-	string filename = "input_label_1-10.xml";
+	string filename = "input_label_0-9.xml";
 	FileStorage fs(filename, FileStorage::WRITE);
 	fs << "input" << input_normalized;
 	fs << "target" << target_; // Write cv::Mat
@@ -59,7 +59,7 @@ int csv2xml()
 	Mat input_1000 = input_normalized(Rect(0, 0, 10000, input_normalized.rows));
 	Mat target_1000 = target_(Rect(0, 0, 10000, target_.rows));
 
-	string filename2 = "input_label_1-10_10000.xml";
+	string filename2 = "input_label_0-9_10000.xml";
 	FileStorage fs2(filename2, FileStorage::WRITE);
 
 	fs2 << "input" << input_1000;

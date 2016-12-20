@@ -121,7 +121,9 @@ namespace liu
 		for (int i = 0; i < weights.size(); ++i)
 		{
 			cv::Mat delta_weights = learning_rate * (delta_err[i] * layer[i].t());
+			cv::Mat delta_bias = learning_rate*delta_err[i];
 			weights[i] = weights[i] + delta_weights;
+			bias[i] = bias[i] + delta_bias;
 		}
 	}
 
@@ -370,7 +372,6 @@ namespace liu
 			std::cout << "Please give one sample alone and ensure input.rows = layer[0].rows" << std::endl;
 			return -1;
 		}
-
 	}
 
 	//Predict,more  than one samples
@@ -434,7 +435,6 @@ namespace liu
 		cv::FileStorage fs;
 		fs.open(filename, cv::FileStorage::READ);
 		cv::Mat input_, target_;
-
 		fs["input"] >> input_;
 		fs["target"] >> target_;
 		fs.release();
@@ -461,9 +461,7 @@ namespace liu
 			}
 		}
 		cv::imshow("Loss", board);
-		cv::waitKey(20);
+		cv::waitKey(1);
 	}
-
-
 
 }
