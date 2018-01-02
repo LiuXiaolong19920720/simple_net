@@ -54,7 +54,7 @@ namespace liu
 		void initBias(cv::Scalar& bias);
 
 		//Forward
-		void farward();
+		void forward();
 
 		//Forward
 		void backward();

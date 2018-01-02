@@ -81,7 +81,7 @@ namespace liu
 	}
 
 	//Forward
-	void Net::farward()
+	void Net::forward()
 	{
 		for (int i = 0; i < layer_neuron_num.size() - 1; ++i)
 		{
@@ -153,13 +153,13 @@ namespace liu
 			target = target_;
 			sample = input;
 			layer[0] = sample;
-			farward();
+			forward();
 			//backward();
 			int num_of_train = 0;
 			while (accuracy < accuracy_threshold)
 			{
 				backward();
-				farward();
+				forward();
 				num_of_train++;
 				if (num_of_train % 500 == 0)
 				{
@@ -184,7 +184,7 @@ namespace liu
 					sample = input.col(i);
 
 					layer[0] = sample;
-					farward();
+					forward();
 					batch_loss += loss;
 					backward();
 				}
@@ -227,13 +227,13 @@ namespace liu
 			target = target_;
 			sample = input;
 			layer[0] = sample;
-			farward();
+			forward();
 			//backward();
 			int num_of_train = 0;
 			while (loss > loss_threshold)
 			{
 				backward();
-				farward();
+				forward();
 				num_of_train++;
 				if (num_of_train % 500 == 0)
 				{
@@ -258,7 +258,7 @@ namespace liu
 					sample = input.col(i);
 					layer[0] = sample;
 
-					farward();
+					forward();
 					backward();
 
 					batch_loss += loss;
@@ -359,7 +359,7 @@ namespace liu
 		if (input.rows == (layer[0].rows) && input.cols == 1)
 		{
 			layer[0] = input;
-			farward();
+			forward();
 
 			cv::Mat layer_out = layer[layer.size() - 1];
 			cv::Point predict_maxLoc;
