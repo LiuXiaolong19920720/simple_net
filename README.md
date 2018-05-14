@@ -1,4 +1,4 @@
-# simple_net
+# Simple Net
 **Simple net** is a simple deep neural network implemented in C++，based with OpenCV Mat matrix class
 
 ---
