@@ -377,18 +377,17 @@ namespace liu
 	//Predict,more  than one samples
 	std::vector<int> Net::predict(cv::Mat &input)
 	{
-		cv::Mat sample;
+		std::vector<int> predicted_labels;
 		if (input.rows == (layer[0].rows) && input.cols > 1)
 		{
-			std::vector<int> predicted_labels;
 			for (int i = 0; i < input.cols; ++i)
 			{
-				sample = input.col(i);
+				cv::Mat sample = input.col(i);
 				int predicted_label = predict_one(sample);
 				predicted_labels.push_back(predicted_label);
-				return predicted_labels;
 			}
 		}
+		return predicted_labels;
 	}
 
 	//Save model;
