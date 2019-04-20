@@ -145,7 +145,7 @@ namespace liu
 			return;
 		}
 
-		std::cout << "Train,begain!" << std::endl;
+		std::cout << "Train,begin!" << std::endl;
 
 		cv::Mat sample;
 		if (input.rows == (layer[0].rows) && input.cols == 1)
@@ -219,7 +219,7 @@ namespace liu
 			return;
 		}
 
-		std::cout << "Train,begain!" << std::endl;
+		std::cout << "Train,begin!" << std::endl;
 
 		cv::Mat sample;
 		if (input.rows == (layer[0].rows) && input.cols == 1)
